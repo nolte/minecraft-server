@@ -13,6 +13,7 @@ jobs:
         python-version: [3.7]
     steps:
     - uses: actions/checkout@v1
+    - run: pip install wheel
     - name: install tox
       run: pip install tox
     - name: pip install -r requirements.txt
