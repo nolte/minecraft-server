@@ -13,16 +13,12 @@ jobs:
         python-version: [3.7]
     steps:
     - uses: actions/checkout@v1
-    - run: pip install wheel
-    - name: install tox
-      run: pip install tox &&  which tox
-    - name: pip install -r requirements.txt
-      run: pip install -r requirements.txt
-    - name: update
-      run: sudo apt-get -qq update   
-    - name: install bsdtar
-      run: sudo apt-get install -y bsdtar
-    - name: install terraform
-      run: wget -qO- https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip | sudo bsdtar -xvf- -C /usr/bin
-    - run: sudo chmod +x /usr/bin/terraform
-    - run: tox
+    - run: |
+        pip install wheel
+        pip install tox
+        pip install -r requirements.txt
+        sudo apt-get -qq update   
+        sudo apt-get install -y bsdtar
+        wget -qO- https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip | sudo bsdtar -xvf- -C /usr/bin
+        sudo chmod +x /usr/bin/terraform
+        tox
