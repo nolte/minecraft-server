@@ -1,24 +1,20 @@
 name: Infrastructure CI
-
 on: [push]
-
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.7]
     steps:
-    - uses: actions/checkout@v1
-    - run: |
-        sudo pip install wheel
-        sudo pip install tox
-        sudo pip install -r requirements.txt
-        sudo apt-get -qq update   
-        sudo apt-get install -y bsdtar
-        wget -qO- https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip | sudo bsdtar -xvf- -C /usr/bin
-        sudo chmod +x /usr/bin/terraform
-        tox
+        - uses: actions/checkout@v1
+        - run: |
+            sudo pip install wheel
+            sudo pip install tox
+            sudo pip install -r requirements.txt
+            sudo apt-get -qq update   
+            sudo apt-get install -y bsdtar
+            wget -qO- https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip | sudo bsdtar -xvf- -C /usr/bin
+            sudo chmod +x /usr/bin/terraform
+            tox
